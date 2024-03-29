@@ -1,0 +1,42 @@
+<app-poke-header></app-poke-header>
+
+<main>
+  @if (isLoading) {
+  <section class="pokemon__names">
+    <h1 class="slideInLeft">{{ pokemon[0].name }}</h1>
+    <h2 class="slideInRight">{{ pokemon[1].names[0].name }}</h2>
+  </section>
+
+  <section class="pokemon__status">
+    <img
+      [src]="pokemon[0].sprites.other.dream_world.front_default"
+      [alt]="pokemon[0].name"
+      class="slideInDown"
+    />
+
+    <article class="pokemon__status__statistcs fadeIn">
+      <section>
+        <h3>Estatísticas</h3>
+        @for (item of pokemon[0].stats; track item) {
+        <ol>
+          <li>
+            {{ item.stat.name }}
+            <strong>
+              {{ item.base_stat }}
+            </strong>
+          </li>
+        </ol>
+        }
+      </section>
+      <a [routerLink]="['']" class="btn btn__secondary">Voltar</a>
+    </article>
+  </section>
+  } @else if(apiError){
+
+  <img
+    src="assets/error.png"
+    alt="Ocorreu um erro nos detalhes do pokémon"
+    width="100%"
+  />
+  }
+</main>
